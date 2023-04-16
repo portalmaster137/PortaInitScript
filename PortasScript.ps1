@@ -10,7 +10,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 if (Test-Path "D:\")
 {
     Write-Host "D Drive found, chaning SCOOP to D:\Scoop"
-    #mkdir D:\Scoop
+    mkdir "D:\Scoop"
     [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
 }
 
