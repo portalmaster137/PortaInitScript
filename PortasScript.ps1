@@ -35,3 +35,8 @@ Write-Host "Installing Java 17"
 jabba install openjdk@1.17.0
 Write-Host "Installing IDEA"
 scoop install idea
+Write-Host "Installing Discord"
+scoop install discord
+Write-Host "Installing Steam"  
+scoop install steam
+Write-Host "### Done! ###"
