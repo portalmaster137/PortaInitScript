@@ -7,3 +7,9 @@ Write-Host "Installing Scoop..."
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 Write-Host "Installing Git for bucket support via Scoop..."
 scoop install git
+Write-Host "Installing Extras bucket..."
+scoop bucket add extras
+Write-Host "Installing VS Code..."
+scoop install vscode
+Write-Host "Adding Jabba"
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://github.com/shyiko/jabba/raw/master/install.ps1')
