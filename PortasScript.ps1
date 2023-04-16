@@ -9,9 +9,16 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 #check for D drive
 if (Test-Path "D:\")
 {
-    Write-Host "D Drive found, chaning SCOOP to D:\Scoop"
-    mkdir "D:\Scoop"
-    [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
+    #if D:\Scoop exists
+    if (Test-Path "D:\Scoop")
+    {
+        Write-Host "D:\Scoop Folder exists, skipping drive check"
+        [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
+    } else {
+        Write-Host "D:\Scoop does not exist, creating..."
+        New-Item -ItemType Directory -Path "D:\Scoop"
+        [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
+    }
 }
 
 #check for scoop command
@@ -35,6 +42,7 @@ Write-Host "Installing VS Code..."
 scoop install vscode
 Write-Host "Adding Jabba"
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://github.com/shyiko/jabba/raw/master/install.ps1')
+$env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
 Write-Host "Installing Java 8"
 jabba install adopt-openj9@1.8.0-292
 Write-Host "Installing Java 17"
