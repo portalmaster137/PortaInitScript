@@ -7,6 +7,10 @@ Write-Host "Setting Execution Policy to RemoteSigned on CurrentUser..."
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 Write-Host "Installing Scoop..."
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+
+#refresh env vars
+$env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
+
 Write-Host "Installing Git for bucket support via Scoop..."
 scoop install git
 Write-Host "Installing Extras bucket..."
