@@ -14,9 +14,15 @@ if (Test-Path "D:\")
     [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
 }
 
-
-Write-Host "Installing Scoop..."
-Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+#check for scoop command
+if (Get-Command scoop -ErrorAction SilentlyContinue)
+{
+    Write-Host "Scoop already installed, updating..."
+    scoop update
+} else {
+    Write-Host "Installing Scoop..."
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+}
 
 #refresh env vars
 $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
