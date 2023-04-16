@@ -52,5 +52,6 @@ scoop install idea
 Write-Host "Installing Discord"
 scoop install discord
 Write-Host "Installing Steam"  
+scoop bucket add versions
 scoop install steam
 Write-Host "### Done! ###"
