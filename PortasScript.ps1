@@ -5,6 +5,16 @@ if ( (New-Object Security.Principal.WindowsPrincipal([Security.Principal.Windows
 }
 Write-Host "Setting Execution Policy to RemoteSigned on CurrentUser..."
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+#check for D drive
+if (Test-Path "D:\")
+{
+    Write-Host "D Drive found, chaning SCOOP to D:\Scoop"
+    #mkdir D:\Scoop
+    [environment]::SetEnvironmentVariable("SCOOP", "D:\Scoop", "User")
+}
+
+
 Write-Host "Installing Scoop..."
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 
@@ -19,3 +29,9 @@ Write-Host "Installing VS Code..."
 scoop install vscode
 Write-Host "Adding Jabba"
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://github.com/shyiko/jabba/raw/master/install.ps1')
+Write-Host "Installing Java 8"
+jabba install adopt-openj9@1.8.0-292
+Write-Host "Installing Java 17"
+jabba install openjdk@1.17.0
+Write-Host "Installing IDEA"
+scoop install idea
